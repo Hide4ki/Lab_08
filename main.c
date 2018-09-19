@@ -11,39 +11,36 @@ int main(void)
 	processing_line(line);
 	puts(line);
 	getchar();
-	getchar();
 	return 0;
 }
 
 void processing_line(char *buf)
 {
-	char *ps;
-	char *ph;
-	char *pt;
-	char *now;
-	int cnt;
+	char *ps;     //pointer start word 
+	char *pt;	  //pointer tmp
+	char *now;	  //pointer to current character
+	int cnt;      //counter
 	ps = 0;
 	cnt = 0;
 	now = buf-1;
 	do 
 	{
-		now++;
-		if(*now  == ' ' || *now == '.' || *now == ',' || *now == '\n' || *now == '\0')
+		now++; //next character
+		if(*now  == ' ' || *now == '.' || *now == ',' || *now == '\n' || *now == '\0')//check end of word
 		{
-			if(ps && !(cnt&1))
+			if(ps && !(cnt&1))//there is a word start and even number vowels
 			{
-				ph = ps;
-				pt = now;
-				while(*ph++ = *pt++);
-				now = ps--;
+				pt = ps;//remember start is deleteing word
+				while(*ps++ = *now++);//deleting word
+				now = pt-1;//return pointer on correct character
 			}
-			cnt = 0;
-			ps = 0;
+			cnt = 0;//zeroing the counter
+			ps = 0;//zeroing the pointer start 
 		}
 		else
 		{
-			if(!ps)	ps = now;
-			if(*now  == 'a' || *now == 'e' || *now == 'y' || *now == 'u' || *now == 'i' || *now == 'o')cnt++;
+			if(!ps)	ps = now;//if there is no start, let's remeber start
+			cnt += *now  == 'a' | *now == 'e' | *now == 'y' | *now == 'u' | *now == 'i' | *now == 'o';//if character is vowels, then +1 to counter
 		}
 	}while(*now);
 }
