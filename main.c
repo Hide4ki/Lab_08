@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 
 #define LIMIT 1000
 
@@ -22,7 +21,6 @@ void processing_line(char *buf)
 	char *ph;
 	char *pt;
 	char *now;
-	char tmp;
 	int cnt;
 	ps = 0;
 	cnt = 0;
@@ -32,7 +30,7 @@ void processing_line(char *buf)
 		now++;
 		if(*now  == ' ' || *now == '.' || *now == ',' || *now == '\n' || *now == '\0')
 		{
-			if(ps && (cnt+1)%2)
+			if(ps && !(cnt&1))
 			{
 				ph = ps;
 				pt = now;
@@ -45,8 +43,7 @@ void processing_line(char *buf)
 		else
 		{
 			if(!ps)	ps = now;
-			tmp = tolower(*now);
-			if(tmp  == 'a' || tmp == 'e' || tmp == 'y' || tmp == 'u' || tmp == 'i' || tmp == 'o')cnt++;
+			if(*now  == 'a' || *now == 'e' || *now == 'y' || *now == 'u' || *now == 'i' || *now == 'o')cnt++;
 		}
 	}while(*now);
 }
