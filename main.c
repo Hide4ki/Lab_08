@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #define LIMIT 1000
+#define gets(s) fgets((s),sizeof(s),stdin)
 
 void processing_line(char *buf);
 
