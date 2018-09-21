@@ -40,7 +40,7 @@ void processing_line(char *buf)
 		}
 		else
 		{
-			if(!ps)	ps = now;//if there is no start, let's remeber start
+			ps = ((!ps)?now:ps);//if there is no start, let's remeber start
 			cnt += *now  == 'a' | *now == 'e' | *now == 'y' | *now == 'u' | *now == 'i' | *now == 'o';//if character is vowels, then +1 to counter
 		}
 	}while(*now);
