@@ -27,7 +27,7 @@ void processing_line(char *buf)
 	do 
 	{
 		now++; //next character
-		if(*now  == ' ' || *now == '.' || *now == ',' || *now == '\n' || *now == '\0')//check end of word
+		if((*now < 'a' || *now > 'z' )&&(*now < 'A' || *now > 'Z'))//check end of word
 		{
 			if(ps && !(cnt&1))//there is a word start and even number vowels
 			{
